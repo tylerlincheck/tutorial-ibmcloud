@@ -6,9 +6,8 @@
     ansible.builtin.uri:
       url: "{{ policy_as_code_plan_validation_url }}"
       method: POST
-      body: '{ "input": { "tfplan": {{ tfshow.stdout }} } }'
+      body: '{ "input": { "volume_size": { "{{volume_size}}" } } }'
       body_format: json
-    check_mode: no
     register: validation_response
     failed_when:
       - validation_response.json.result.passes_validation == false
@@ -26,22 +25,5 @@
   - name: add volume to instance
     amazon.aws.ec2_vol:
       instance: "{{ item.instance_id }}"
-      volume_size: 40
+      volume_size: "{{volume_size}}"
     loop: "{{ ec2.instances }}"
-
-  - name: Pause for 5 minutes to build app cache
-    ansible.builtin.pause:
-      seconds: 20
-
-    #Get correct json input
-
-  - name: get volume(s) info from EC2 Instance
-    amazon.aws.ec2_vol_info:
-      filters:
-        attachment.instance-id: "{{ ec2.instances[0].instance_id }}"
-    register: volumes
-
-  - name: Save volume info to file
-    copy:
-      content: "{{ volumes | to_json | to_nice_json }}"
-      dest: "input.json"
