@@ -23,9 +23,6 @@
       wait: true
       count: 1
     register: ec2
-  - name: Pause for 5 minutes to build app cache
-    ansible.builtin.pause:
-      seconds: 60
   - name: add volume to instance
     amazon.aws.ec2_vol:
       instance: "{{ item.instance_id }}"
