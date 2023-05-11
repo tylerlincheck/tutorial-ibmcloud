@@ -26,5 +26,6 @@
   - name: add volume to instance
     amazon.aws.ec2_vol:
       instance: "{{ item.instance_id }}"
-      volume_size: 40
+      volume_size: "{{ volume_size }}"
+      region: "us-east-2"
     loop: "{{ ec2.instances }}"
