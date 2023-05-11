@@ -1,7 +1,17 @@
 ---
 - name: AWS EC2 Instance Configuration
   hosts: localhost
-  tasks:           
+  tasks: 
+  - name: Validate plan
+    ansible.builtin.uri:
+      url: "{{ policy_as_code_plan_validation_url }}"
+      method: POST
+      body: '{ "input": { "tfplan": {{ tfshow.stdout }} } }'
+      body_format: json
+    check_mode: no
+    register: validation_response
+    failed_when:
+      - validation_response.json.result.passes_validation == false
   - name: create instance
     amazon.aws.ec2_instance:
       name: "{{name}}"
