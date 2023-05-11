@@ -14,7 +14,7 @@
   - name: create instance
     amazon.aws.ec2_instance:
       name: "{{name}}"
-      region: "us_east_2"
+      region: "us-east-2"
       key_name: "{{ keypair }}"
       image_id: "{{ image }}"
       vpc_subnet_id: "{{vpc_subnet_id}}"
