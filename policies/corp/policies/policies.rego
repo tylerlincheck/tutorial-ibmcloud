@@ -1,15 +1,7 @@
-package example
+package corp.policies
 
-default allow := true
+default passes_validation := false
 
-allow := false {
-    count(violation) > 0
-}
-
-violation[0] {
-    volume_size
-}
-
-volume_size {
+passes_validation := true {
     input.volumes[i].size == 50
 }
