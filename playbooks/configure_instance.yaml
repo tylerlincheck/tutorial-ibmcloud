@@ -6,7 +6,7 @@
     ansible.builtin.uri:
       url: "{{ policy_as_code_plan_validation_url }}"
       method: POST
-      body: '{ "input:": { "volume_size:\"{{volume_size}}\"": {} } }'
+      body: '{ "input": { "volume_size": "{{volume_size}}" } }'
       body_format: json
     register: validation_response
     failed_when:
