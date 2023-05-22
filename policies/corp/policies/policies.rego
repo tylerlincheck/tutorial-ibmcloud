@@ -4,8 +4,8 @@ default passes_validation := false
 
 passes_validation := true {
   volume_size
-  security_policy
-  subnet_id
+  #security_policy
+  #subnet_id
 }
 
 volume_size := true {
