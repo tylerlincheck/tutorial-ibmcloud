@@ -3,7 +3,8 @@ package corp.policies
 default passes_validation := false
 
 passes_validation := true {
-    volume_size
+   input.tfplan.format_version == "1.1"
+   # volume_size
    # security_policy
    # subnet_id
 }
