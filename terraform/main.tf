@@ -1,34 +1,56 @@
-terraform {
-  required_providers {
-    ibm = {
-      source = "IBM-Cloud/ibm"
-      version = "1.47.0-beta2"
-    }
+provider "aws" {
+    access_key = "AKIA46DEW4O7OLNE752X"
+    secret_key = "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"
+    region = "us-east-2"
+}
+
+resource "aws_security_group" "new-sg" {
+  name = "my-sec-grp"
+  vpc_id      = "vpc-0980463a25ba24a2b"
+  description = "Allow HTTP and SSH traffic via Terraform"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
-provider "ibm" {
-  # Configuration options
+resource "aws_instance" "ec2_instance" {
+    ami = "ami-0521a1ab6cb98215d"
+    count = 1
+    subnet_id = "subnet-08f72eee863a99fe7"
+    instance_type = "t2.micro"
+    key_name = "MyKeyPair"
+    vpc_security_group_ids = ["${aws_security_group.new-sg.id}"]
+} 
+
+resource "aws_ebs_volume" "data-vol" {
+ availability_zone = "us-east-2c"
+ size = 40
+ tags = {
+        Name = "data-volume"
+ }
+
 }
-
-data "ibm_resource_group" "default_group" {
-  name = "default"
-}
-
-resource "ibm_cloudant" "cloudant" {
-  name     = "policy-as-code-cloudant"
-  location = "us-south"
-  plan     = "lite"
-  # tags     = ["costcenter:001589"]
-
-  timeouts {
-    create = "15m"
-    update = "15m"
-    delete = "15m"
-  }
-}
-
-resource "ibm_cloudant_database" "cloudant_database" {
-  instance_crn  = ibm_cloudant.cloudant.crn
-  db            = "policyascode"
+#
+resource "aws_volume_attachment" "attach-vol" {
+ device_name = "/dev/sdc"
+ volume_id = "${aws_ebs_volume.data-vol.id}"
+ instance_id = "${aws_instance.ec2_instance[0].id}"
 }
