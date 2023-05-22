@@ -9,14 +9,14 @@ passes_validation := true {
 }
 
 volume_size := true {
-    input.planned_values.root_module.resources[0].values.size = 40
+    input.tfplan.planned_values.root_module.resources[0].values.size = 40
 }
 
 security_policy := true {
-    input.planned_values.root_module.resources[2].values.ingress[0].from_port = 22
-    input.planned_values.root_module.resources[2].values.ingress[0].to_port = 22
+    input.tfplan.planned_values.root_module.resources[2].values.ingress[0].from_port = 22
+    input.tfplan.planned_values.root_module.resources[2].values.ingress[0].to_port = 22
 }
 
 subnet_id := true {
-    input.planned_values.root_module.resources[1].values.subnet_id = "subnet-08f72eee863a99fe7"
+    input.tfplan.planned_values.root_module.resources[1].values.subnet_id = "subnet-08f72eee863a99fe7"
 }
