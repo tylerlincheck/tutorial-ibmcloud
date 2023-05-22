@@ -1,6 +1,6 @@
 provider "aws" {
-    access_key = "AKIA46DEW4O7OLNE752X"
-    secret_key = "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"
+    access_key = file("access_key.txt")
+    secret_key = file("secret_key.txt")
     region = "us-east-2"
 }
 
