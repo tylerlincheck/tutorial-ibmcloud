@@ -2,11 +2,11 @@ package corp.policies
 
 default passes_validation := true
 
-passes_validation := true {
+#passes_validation := true {
   #volume_size
   #security_policy
   #subnet_id
-}
+#}
 
 volume_size := true {
     input.tfplan.planned_values.root_module.resources[0].values.size == 40
