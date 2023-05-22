@@ -3,14 +3,14 @@ package corp.policies
 default passes_validation := false
 
 passes_validation := true {
-   input.tfplan.format_version == "1.1"
-   # volume_size
+   volume_size
    # security_policy
    # subnet_id
 }
 
 volume_size := true {
-    input.tfplan.planned_values.root_module.resources[0].values.size == 40
+    volumes := resources["aws_ebs_volume"]
+    volumes.values.size == 40
 }
 
 security_policy := true {
