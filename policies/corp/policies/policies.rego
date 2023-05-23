@@ -1,12 +1,11 @@
 package corp.policies
 
-default passes_validation := true
+default passes_validation := false
 
 passes_validation {
- 1 == 1
- # volume_size
- # security_policy
- # subnet_id
+ volume_size
+ security_policy
+ subnet_id
 }
 
 volume_size {
