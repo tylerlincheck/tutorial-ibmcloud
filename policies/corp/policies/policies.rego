@@ -7,7 +7,7 @@ passes_validation {
 # volume_size
 # security_policy
 # subnet_id
-#}
+}
 
 #volume_size {
 #  input.tfplan.planned_values.root_module.resources[0].values.size == 40
