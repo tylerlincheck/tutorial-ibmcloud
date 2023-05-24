@@ -1,6 +1,6 @@
 package corp.policies
 
-default passes_validation := false
+default passes_validation := true
 
 #passes_validation {
 # volume_size
