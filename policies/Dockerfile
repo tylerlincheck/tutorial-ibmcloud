@@ -1,4 +1,4 @@
-FROM docker.io/openpolicyagent/opa:0.45.0-rootless
+FROM docker.io/openpolicyagent/opa:0.52.0-rootless
 
 WORKDIR /app/opa/policies
 
