@@ -3,7 +3,7 @@
   vars:
     git_clone_path: '/tmp/ansible-pac-test'
     tf_project_path: '/tmp/ansible-pac-test/terraform'
-    policy_as_code_plan_validation_url: "http://10.240.18.0:8181/v1/data/corp/policies"
+    policy_as_code_plan_validation_url: "http://10.240.18.0:8181/v1/data"
     git_repo_https_clone_url: ""
 
   tasks:
@@ -43,7 +43,7 @@
     
     - name: Validate plan
       ansible.builtin.uri:
-        url: "http://10.240.18.0:8181/v1/data/corp/policies"
+        url: "http://10.240.18.0:8181/v1/data"
         method: POST
         body: '{ "input": { "tfplan": {{ tfshow.stdout }} } }'
         body_format: json
