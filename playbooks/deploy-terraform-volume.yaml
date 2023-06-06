@@ -2,7 +2,7 @@
   connection: local
   vars:
     git_clone_path: '/tmp/ansible-pac-test'
-    tf_project_path: '/tmp/ansible-pac-test/terraform'
+    tf_project_path: '/tmp/ansible-pac-test/terraform/add_volume'
     git_repo_https_clone_url: ""
 
   tasks:
