@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_security_group" "new-sg" {
-  name = "my-sec-grp-2"
+  name = "my-sec-grp-3"
   vpc_id      = "vpc-0980463a25ba24a2b"
   description = "Allow HTTP and SSH traffic via Terraform"
 
