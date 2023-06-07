@@ -37,3 +37,18 @@ resource "aws_instance" "ec2_instance" {
     key_name = "MyKeyPair"
     vpc_security_group_ids = ["${aws_security_group.new-sg.id}"]
 } 
+
+resource "aws_ebs_volume" "data-vol" {
+ availability_zone = "us-east-2c"
+ size = 40
+ tags = {
+        Name = "data-volume"
+ }
+
+}
+#
+resource "aws_volume_attachment" "attach-vol" {
+ device_name = "/dev/sdc"
+ volume_id = "${aws_ebs_volume.data-vol.id}"
+ instance_id = "${aws_instance.ec2_instance[0].id}"
+}
