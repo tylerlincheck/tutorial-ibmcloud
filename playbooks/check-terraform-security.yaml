@@ -43,7 +43,7 @@
     
     - name: Validate plan
       ansible.builtin.uri:
-        url: "http://18.223.166.155:8181/v1/data/corp/policies"
+        url: "http://172.31.34.126:8181/v1/data/corp/policies"
         method: POST
         body: '{ "input": { "tfplan": {{ tfshow.stdout }} } }'
         body_format: json
