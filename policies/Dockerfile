@@ -4,4 +4,4 @@ WORKDIR /app/opa/policies
 
 COPY . .
 
-CMD ["run", "--server", "--bundle", "."]
+CMD ["run", "--server", "."]
